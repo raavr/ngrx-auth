@@ -13,7 +13,6 @@ export class AuthEffects {
   login$ = this.actions$.pipe(
     ofType<Login>(AuthActionTypes.Login),
     map(action => action.payload),
-    delay(4000),
     exhaustMap((credentials: Credentials) => 
       this.authSerivce.login(credentials).pipe(
         map(user => new LoginSuccess({ user })),
