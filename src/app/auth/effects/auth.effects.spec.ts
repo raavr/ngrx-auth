@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jasmine-marbles';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Credentials, User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { AuthEffects } from '../effects/auth.effects';
@@ -65,6 +65,15 @@ describe('AuthEffects', () => {
     authService.login = () => response;
 
     expect(effects.login$).toBeObservable(expected);
+  });
+
+  it('should navigate to "/" when loginSuccess effect is called', (done) => {
+    const action = new LoginSuccess({ user: { name: 'Test' }});
+    actions$ = of(action);
+    effects.loginSuccess$.subscribe(() => {
+      expect(routerService.navigate).toHaveBeenCalledWith(['/']);
+      done();
+    });
   });
 
 });
