@@ -4,10 +4,11 @@ import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
-import { Credentials, User } from '../models/user';
+import { Credentials } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { AuthEffects } from '../effects/auth.effects';
 import { Login, LoginSuccess, LoginFailure } from '../actions/auth.actions';
+import { Token } from '../models/token';
 
 describe('AuthEffects', () => {
   let effects: AuthEffects;
@@ -41,12 +42,12 @@ describe('AuthEffects', () => {
 
   it('should return a LoginSuccess action with user object if login succeeds', () => {
     const credentials: Credentials = { email: 'test@example.com', password: '' };
-    const user = { name: 'Test' } as User;
+    const token = { token: 'some_token' } as Token;
     const action = new Login(credentials);
-    const completion = new LoginSuccess({ user });
+    const completion = new LoginSuccess(token);
 
     actions$ = hot('-a---', { a: action });
-    const response = cold('-a|', { a: user });
+    const response = cold('-a|', { a: token });
     const expected = cold('--b', { b: completion });
     authService.login = () => response;
 
@@ -57,7 +58,7 @@ describe('AuthEffects', () => {
     const credentials: Credentials = { email: 'test@example.com', password: '' };
     const action = new Login(credentials);
     const completion = new LoginFailure('Invalid email or password');
-    const error = 'Invalid email or password';
+    const error = { error: { message: 'Invalid email or password' }};
 
     actions$ = hot('-a---', { a: action });
     const response = cold('-#', {}, error);
@@ -68,7 +69,7 @@ describe('AuthEffects', () => {
   });
 
   it('should navigate to "/" when loginSuccess effect is called', (done) => {
-    const action = new LoginSuccess({ user: { name: 'Test' }});
+    const action = new LoginSuccess({ token: 'some_token' });
     actions$ = of(action);
     effects.loginSuccess$.subscribe(() => {
       expect(routerService.navigate).toHaveBeenCalledWith(['/']);

@@ -22,7 +22,7 @@ describe("Login Reducer", () => {
   });
 
   it('should make pending to false and have no error', () => {
-    const action = new LoginSuccess({ user: { name: 'Test' }});
+    const action = new LoginSuccess({ token: 'some_token' });
     const expectedResult = {
       pending: false,
       error: null

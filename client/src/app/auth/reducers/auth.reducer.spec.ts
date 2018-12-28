@@ -1,5 +1,5 @@
 import { reducer, initialState } from './auth.reducer';
-import { Login, LoginSuccess, LoginFailure } from '../actions/auth.actions';
+import { LoginSuccess } from '../actions/auth.actions';
 
 describe("Auth Reducer", () => {
 
@@ -12,10 +12,9 @@ describe("Auth Reducer", () => {
   });
 
   it('should make pending to false and have no error', () => {
-    const action = new LoginSuccess({ user: { name: 'Test' }});
-    const expectedResult = {
-      user: { name: 'Test' },
-    }
+    const action = new LoginSuccess({ token: 'some_token'});
+    const expectedResult = { token: 'some_token'};
+
     const result = reducer(initialState, action);
     expect(result).toEqual(expectedResult);
   });

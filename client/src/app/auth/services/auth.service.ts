@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { User, Credentials } from '../models/user';
-import { Observable, throwError, of } from 'rxjs';
+import { Credentials } from '../models/user';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Token } from '../models/token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  login({ email, password }: Credentials): Observable<User> {
-    if (email !== 'test@example.com') {
-      return throwError('Invalid email or password');
-    }
+  constructor(private http: HttpClient) { }
 
-    return of({ name: 'User' });
+  login(credentials: Credentials): Observable<Token> {
+    return this.http.post('http://localhost:3000/login', credentials) as Observable<Token>;
   }
 
 }
