@@ -1,2 +1,3 @@
-<a routerLink="login">Login</a>
+<a *ngIf="!(loggedIn$ | async)" routerLink="login">Login</a>
+<a href="#" *ngIf="loggedIn$ | async" (click)="logout(); $event.preventDefault()">Logout</a>
 <router-outlet></router-outlet>

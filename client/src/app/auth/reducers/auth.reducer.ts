@@ -17,6 +17,10 @@ export function reducer(state = initialState, action: AuthActionUnion): State {
       }
     }
 
+    case AuthActionTypes.Logout: {
+      return initialState;
+    }
+
     default: {
       return state;
     }

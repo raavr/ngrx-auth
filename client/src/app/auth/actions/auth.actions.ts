@@ -5,7 +5,9 @@ import { Token } from '../models/token';
 export enum AuthActionTypes {
   Login = '[Auth] Login',
   LoginSuccess = '[Auth] Login Success',
-  LoginFailure = '[Auth] Login Failure'
+  LoginFailure = '[Auth] Login Failure',
+  LoginRedirect = '[Auth] Login Redirect',
+  Logout = '[Auth] Logout',
 }
 
 export class Login implements Action {
@@ -26,7 +28,17 @@ export class LoginFailure implements Action {
   constructor(public payload: any) {}
 }
 
+export class LoginRedirect implements Action {
+  readonly type = AuthActionTypes.LoginRedirect;
+}
+
+export class Logout implements Action {
+  readonly type = AuthActionTypes.Logout;
+}
+
 export type AuthActionUnion = 
   | Login
   | LoginSuccess
-  | LoginFailure;
+  | LoginFailure
+  | LoginRedirect
+  | Logout;
