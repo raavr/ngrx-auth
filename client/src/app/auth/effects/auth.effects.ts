@@ -6,6 +6,7 @@ import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 import { Credentials } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { TokenService } from '../services/token.service';
 
 @Injectable()
 export class AuthEffects {
@@ -24,13 +25,16 @@ export class AuthEffects {
 
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$.pipe(
-    ofType(AuthActionTypes.LoginSuccess),
+    ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
+    map(action => action.payload),
+    tap(({ token }) => this.tokenService.setToken(token)),
     tap(() => this.router.navigate(['/']))
   );
 
   constructor(
     private actions$: Actions, 
     private authSerivce: AuthService,
+    private tokenService: TokenService,
     private router: Router
   ) {}
 }
