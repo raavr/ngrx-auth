@@ -1,5 +1,5 @@
-import { reducer, initialState } from './auth.reducer';
-import { LoginSuccess, Logout } from '../actions/auth.actions';
+import { reducer, initialState, State } from './auth.reducer';
+import { Logout, DecodeTokenSuccess } from '../actions/auth.actions';
 
 describe("Auth Reducer", () => {
 
@@ -12,11 +12,11 @@ describe("Auth Reducer", () => {
   });
 
   it('should make pending to false and have no error', () => {
-    const action = new LoginSuccess({ token: 'some_token' });
-    const expectedResult = { token: 'some_token' };
+    const action = new DecodeTokenSuccess({ id: 1, name: 'Test', role: 'Admin' });
+    const expResult = { user: { id: 1, name: 'Test', role: 'Admin' } } as State;
 
     const result = reducer(initialState, action);
-    expect(result).toEqual(expectedResult);
+    expect(result).toEqual(expResult);
   });
 
   it('should logout a user', () => {

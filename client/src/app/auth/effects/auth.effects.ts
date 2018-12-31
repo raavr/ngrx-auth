@@ -1,12 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { AuthActionTypes, Login, LoginSuccess, LoginFailure, Logout } from '../actions/auth.actions';
-import { of } from 'rxjs';
-import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
-import { Credentials } from '../models/user';
+import { 
+  AuthActionTypes, 
+  Login, 
+  LoginSuccess, 
+  LoginFailure, 
+  Logout, 
+  DecodeTokenSuccess, 
+  DecodeToken, 
+  AutoLogin, 
+  TokenInvalid
+} from '../actions/auth.actions';
+import { of, iif } from 'rxjs';
+import { 
+  catchError, 
+  exhaustMap, 
+  map, 
+  tap, 
+  mergeMap
+} from 'rxjs/operators';
+import { Credentials, User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { TokenService } from '../services/token.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Token, TokenData } from '../models/token';
 
 @Injectable()
 export class AuthEffects {
@@ -23,13 +41,37 @@ export class AuthEffects {
     )
   )
 
-  @Effect({ dispatch: false })
+  @Effect()
   loginSuccess$ = this.actions$.pipe(
     ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
     map(action => action.payload),
-    tap(({ token }) => this.tokenService.setToken(token)),
-    tap(() => this.router.navigate(['/']))
+    tap(({ token }: Token) => this.tokenService.setToken(token)),
+    map((token: Token) => new DecodeToken(token)),
+    tap(() => this.router.navigate(['/'])),
   );
+
+  @Effect()
+  decodeToken$ = this.actions$.pipe(
+    ofType<DecodeToken>(AuthActionTypes.DecodeToken),
+    map(action => action.payload),
+    mergeMap(({ token }) => 
+      iif(
+        () => this.jwtHelper.isTokenExpired(token),
+        of(new TokenInvalid()),
+        of(token).pipe(
+          map((token: string) => this.jwtHelper.decodeToken(token) as TokenData),
+          map(({ id, name, role }: User) => new DecodeTokenSuccess({ id, name, role })),
+        )
+      )
+    )
+  );
+
+  @Effect()
+  autoLogin$ = this.actions$.pipe(
+    ofType<AutoLogin>(AuthActionTypes.AutoLogin),
+    map(() => this.tokenService.getToken()),
+    map((token: string) => new DecodeToken({ token }))
+  )
 
   @Effect({ dispatch: false })
   logout$ = this.actions$.pipe(
@@ -41,7 +83,8 @@ export class AuthEffects {
   loginRedirect$ = this.actions$.pipe(
     ofType(
       AuthActionTypes.LoginRedirect,
-      AuthActionTypes.Logout
+      AuthActionTypes.Logout,
+      AuthActionTypes.TokenInvalid
     ),
     tap(() => this.router.navigate(['/login']))
   );
@@ -50,6 +93,7 @@ export class AuthEffects {
     private actions$: Actions, 
     private authSerivce: AuthService,
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private jwtHelper: JwtHelperService
   ) {}
 }

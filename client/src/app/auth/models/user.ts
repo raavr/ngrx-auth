@@ -3,6 +3,10 @@ export interface Credentials {
   password: string;
 }
 
+type UserRole = 'Admin' | 'User';
+
 export interface User {
+  id: number;
   name: string;
+  role: UserRole;
 }

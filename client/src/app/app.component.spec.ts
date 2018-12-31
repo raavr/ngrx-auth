@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, combineReducers, Store } from '@ngrx/store';
 import * as fromAuth from './auth/reducers';
-import { Logout } from './auth/actions/auth.actions';
+import { Logout, AutoLogin } from './auth/actions/auth.actions';
 
 describe('AppComponent', () => {
   let store: Store<fromAuth.State>;
@@ -40,16 +40,21 @@ describe('AppComponent', () => {
   });
 
   it('should render a router-outlet', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('router-outlet')).toBeDefined();
   });
-
+  
   it('should dispatch a login action on submit', () => {
     const action = new Logout();
     const app = fixture.debugElement.componentInstance;
     app.logout();
     expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
+  
+  it('should dispatch an AutoLogin action on init', () => {
+    expect(store.dispatch).not.toHaveBeenCalled();
+    fixture.detectChanges();
+    expect(store.dispatch).toHaveBeenCalledWith(new AutoLogin());
   });
 });

@@ -1,19 +1,20 @@
 import { AuthActionUnion, AuthActionTypes } from '../actions/auth.actions';
+import { User } from '../models/user';
 
 export interface State {
-  token: string | null;
+  user: User | null;
 }
 
 export const initialState: State = {
-  token: null
+  user: null
 }
 
 export function reducer(state = initialState, action: AuthActionUnion): State {
   switch(action.type) {
-    case AuthActionTypes.LoginSuccess: {
+    case AuthActionTypes.DecodeTokenSuccess: {
       return {
         ...state,
-        token: action.payload.token
+        user: action.payload
       }
     }
 
@@ -27,4 +28,4 @@ export function reducer(state = initialState, action: AuthActionUnion): State {
   }
 }
 
-export const getToken = (state: State) => state.token;
+export const getUser = (state: State) => state.user;

@@ -27,8 +27,8 @@ export const selectAuthSessionState = createSelector(
   selectAuthState,
   (state: AuthState) => state.session
 );
-export const geToken = createSelector(selectAuthSessionState, fromAuth.getToken);
-export const getLoggedIn = createSelector(geToken, token => !!token);
+export const getUser = createSelector(selectAuthSessionState, fromAuth.getUser);
+export const getLoggedIn = createSelector(getUser, user => !!user);
 
 export const selectLoginState = createSelector(
   selectAuthState,

@@ -1,3 +1,6 @@
 <a *ngIf="!(loggedIn$ | async)" routerLink="login">Login</a>
-<a href="#" *ngIf="loggedIn$ | async" (click)="logout(); $event.preventDefault()">Logout</a>
+<div *ngIf="loggedIn$ | async">
+  <span>Welcome, {{(user$ | async).name}} </span>
+  <a href="#" (click)="logout(); $event.preventDefault()">Logout</a>
+</div>
 <router-outlet></router-outlet>
