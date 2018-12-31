@@ -15,11 +15,13 @@ const SECRET_PASS = 'secret1234pass!';
 const USERS = {
   'admin@example.com': {
     id: 1,
+    name: 'Admin',
     role: 'admin',
     passwordHash: '92295db3afeb4aeb39abe41c7d596a7833f1362d6b6013d43dfa89b96d3449f3' //admin123
   },
   'user@example.com': {
     id: 2,
+    name: 'John',
     role: 'user',
     passwordHash: '5081e47a658989f140abc1e83f7640c13c26a0b82ecb89b516d9c9c297d97adc' //user123
   }
@@ -39,7 +41,8 @@ app.post('/login', (req, res) => {
   const user = USERS[req.body.email];
   if(!!user) {
     if(isCorrectPassword(req.body.email, req.body.password)) {
-      const token = genToken({ id: user.id, role: user.role });
+      const { passwordHash, ...userProfile } = user;
+      const token = genToken(userProfile);
       res.send({ token });
     } else {
       res.status(401).send({message: 'Invalid email or password'});
