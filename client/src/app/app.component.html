@@ -1,6 +1,17 @@
-<a *ngIf="!(loggedIn$ | async)" routerLink="login">Login</a>
-<div *ngIf="loggedIn$ | async">
-  <span>Welcome, {{(user$ | async).name}} </span>
-  <a href="#" (click)="logout(); $event.preventDefault()">Logout</a>
-</div>
-<router-outlet></router-outlet>
+<mat-sidenav-container fullscreen>
+  <app-sidenav [open]="showSidenav$ | async" (closeSidenav)="closeSidenav()">
+    <app-nav-item *ngIf="loggedIn$ | async" (navigate)="closeSidenav()" routerLink="/" icon="person" desc="View my profile">
+      Profile
+    </app-nav-item>
+    <app-nav-item *ngIf="!(loggedIn$ | async)" (navigate)="closeSidenav()" routerLink="/login">
+      Sign In
+    </app-nav-item>
+    <app-nav-item *ngIf="loggedIn$ | async" (navigate)="logout()">
+      Sign Out
+    </app-nav-item>
+  </app-sidenav>
+  <app-toolbar (openSidenav)="openSidenav()">
+    NgRx Auth App
+  </app-toolbar>
+  <router-outlet></router-outlet>
+</mat-sidenav-container>

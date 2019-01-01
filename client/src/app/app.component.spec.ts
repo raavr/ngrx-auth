@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, combineReducers, Store } from '@ngrx/store';
 import * as fromAuth from './auth/reducers';
 import { Logout, AutoLogin } from './auth/actions/auth.actions';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
   let store: Store<fromAuth.State>;
@@ -20,6 +21,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
       ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
@@ -31,12 +33,6 @@ describe('AppComponent', () => {
   it('should create the app', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it('should render login in an <a> tag', () => {
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('a')[0].textContent).toContain('Login');
   });
 
   it('should render a router-outlet', () => {

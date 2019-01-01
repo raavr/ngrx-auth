@@ -16,6 +16,8 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { DOMAINS } from './auth/constants/auth.constant';
 import { TokenService } from './auth/services/token.service';
 import { jwtOptionsFactory } from './auth/services/jwt-options.factory';
+import { NavbarModule } from './navbar/navbar.module';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { jwtOptionsFactory } from './auth/services/jwt-options.factory';
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     EffectsModule.forRoot([AppEffects]),
     BrowserAnimationsModule,
+    MaterialModule,
     AuthModule,
+    NavbarModule,
     RouterModule.forRoot([]),
   ],
   providers: [],
