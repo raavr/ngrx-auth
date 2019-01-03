@@ -17,7 +17,7 @@ import { TokenService } from './auth/services/token.service';
 import { jwtOptionsFactory } from './auth/services/jwt-options.factory';
 import { NavbarModule } from './navbar/navbar.module';
 import { MaterialModule } from './material/material.module';
-import { AppRoutingModule } from './app-routing.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { AppRoutingModule } from './app-routing.module';
     AuthModule,
     NavbarModule,
     RouterModule.forRoot([]),
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
