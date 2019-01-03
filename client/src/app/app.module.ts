@@ -13,11 +13,11 @@ import { CommonModule } from '@angular/common';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { DOMAINS } from './auth/constants/auth.constant';
 import { TokenService } from './auth/services/token.service';
 import { jwtOptionsFactory } from './auth/services/jwt-options.factory';
 import { NavbarModule } from './navbar/navbar.module';
 import { MaterialModule } from './material/material.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -28,10 +28,6 @@ import { MaterialModule } from './material/material.module';
     BrowserModule,
     HttpClientModule,
     JwtModule.forRoot({
-      config: {
-        whitelistedDomains: DOMAINS.WHITE_LISTED,
-        blacklistedRoutes: DOMAINS.BLACK_LISTED
-      },
       jwtOptionsProvider: {
         provide: JWT_OPTIONS,
         useFactory: jwtOptionsFactory,
