@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
+    this.closeSidenav();
     this.store.dispatch(new AuthAction.Logout());
   }
 
