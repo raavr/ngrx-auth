@@ -22,14 +22,14 @@ const USERS = {
     name: 'Admin',
     role: ROLES.ADMIN,
     email: 'admin@example.com',
-    tel: '+48123456789',
+    phone: '+48123456789',
     passwordHash: '92295db3afeb4aeb39abe41c7d596a7833f1362d6b6013d43dfa89b96d3449f3' //admin123
   },
   'de58b32c-291a-45a3-aeba-9911cbabef17': {
     id: 'de58b32c-291a-45a3-aeba-9911cbabef17',
     name: 'John',
     role: ROLES.USER,
-    tel: '+48987654321',
+    phone: '+48987654321',
     email: 'user@example.com',
     passwordHash: '5081e47a658989f140abc1e83f7640c13c26a0b82ecb89b516d9c9c297d97adc' //user123
   }
@@ -61,7 +61,7 @@ function isAuthenticated(req, res, next) {
     req.user = { id: decoded.id, role: decoded.role };
     return next();
   } catch(e) {
-    res.status(401).send({ message: 'Unathorized' });
+    res.status(401).send({ message: 'Unauthorized' });
   }
 }
 
@@ -70,7 +70,7 @@ function isAdmin(req, res, next) {
     return next();
   }
 
-  res.status(401).send({ message: 'Sorry, you\'re not an admin' });
+  res.status(403).send({ message: 'Sorry, you\'re not an admin' });
 } 
 
 app.post('/login', (req, res) => {
