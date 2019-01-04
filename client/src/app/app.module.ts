@@ -17,11 +17,14 @@ import { TokenService } from './auth/services/token.service';
 import { jwtOptionsFactory } from './auth/services/jwt-options.factory';
 import { NavbarModule } from './navbar/navbar.module';
 import { MaterialModule } from './material/material.module';
+import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -41,8 +44,8 @@ import { HomeModule } from './home/home.module';
     MaterialModule,
     AuthModule,
     NavbarModule,
-    RouterModule.forRoot([]),
-    HomeModule
+    HomeModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
