@@ -1,5 +1,8 @@
 <mat-sidenav-container fullscreen>
   <app-sidenav [open]="showSidenav$ | async" (closeSidenav)="closeSidenav()">
+    <app-nav-item *ngIf="loggedIn$ | async" (navigate)="closeSidenav()" routerLink="/" icon="home" desc="Go to the home page">
+      Home
+    </app-nav-item>
     <app-nav-item *ngIf="loggedIn$ | async" (navigate)="closeSidenav()" routerLink="/" icon="person" desc="View my profile">
       Profile
     </app-nav-item>

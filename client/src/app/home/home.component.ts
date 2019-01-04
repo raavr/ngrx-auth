@@ -10,12 +10,12 @@ import { Observable } from 'rxjs';
   template: `
     <mat-card>
       <mat-card-title>Hi, {{(authUser$ | async).name}}</mat-card-title>
+      <mat-card-content>What do you want to do today?</mat-card-content>
     </mat-card>
   `,
   styles: [`
-    mat-card-title {
-      display: flex;
-      justify-content: center;
+    mat-card {
+      text-align: center;
     }
   `]
 })
