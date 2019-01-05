@@ -6,7 +6,9 @@ export interface Credentials {
 type UserRole = 'Admin' | 'User';
 
 export interface User {
-  id: number;
+  id: string;
   name: string;
-  role: UserRole;
+  role?: UserRole;
+  email?: string;
+  phone?: string;
 }

@@ -101,7 +101,7 @@ describe('AuthEffects', () => {
   });
   
   it('should return the DecodeTokenSuccess action when decodeToken$ effect is called and the token is not expired', (done) => {
-    const tokenData: TokenData = { iat: 1, exp: 2, name: 'Asd', id: 1, role: 'Admin' };
+    const tokenData: TokenData = { iat: 1, exp: 2, name: 'Asd', id: '1', role: 'Admin' };
     spyOn(jwtHelperService, 'decodeToken').and.returnValue(tokenData);
     spyTokenExpired.and.returnValue(false);
     const action = new DecodeToken({ token: 'some_token' });
@@ -110,7 +110,7 @@ describe('AuthEffects', () => {
     
     effects.decodeToken$.subscribe((result) => {
       expect(jwtHelperService.decodeToken).toHaveBeenCalledWith('some_token');
-      expect(result).toEqual(new DecodeTokenSuccess({ name: 'Asd', id: 1, role: 'Admin' }));
+      expect(result).toEqual(new DecodeTokenSuccess({ name: 'Asd', id: '1', role: 'Admin' }));
       done();
     });
   });
