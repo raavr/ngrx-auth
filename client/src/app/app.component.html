@@ -3,7 +3,7 @@
     <app-nav-item *ngIf="loggedIn$ | async" (navigate)="closeSidenav()" routerLink="/" icon="home" desc="Go to the home page">
       Home
     </app-nav-item>
-    <app-nav-item *ngIf="loggedIn$ | async" (navigate)="closeSidenav()" routerLink="/" icon="person" desc="View my profile">
+    <app-nav-item *ngIf="loggedIn$ | async" (navigate)="closeSidenav()" routerLink="/profile" icon="person" desc="View my profile">
       Profile
     </app-nav-item>
     <app-nav-item *ngIf="!(loggedIn$ | async)" (navigate)="closeSidenav()" routerLink="/login">
