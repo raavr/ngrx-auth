@@ -5,27 +5,45 @@ import {
 } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import * as fromProfile from './profile.reducer';
+import * as fromAccounts from './accounts.reducer';
 
-export interface ProfileState {
+export interface AccountsState {
+  accounts: fromAccounts.State;
   profile: fromProfile.State;
 }
 
 export interface State extends fromRoot.State {
-  accounts: ProfileState;
+  accounts: AccountsState;
 }
 
-export const reducers: ActionReducerMap<ProfileState> = {
+export const reducers: ActionReducerMap<AccountsState> = {
+  accounts: fromAccounts.reducer,
   profile: fromProfile.reducer,
 };
 
-export const selectAccountState = createFeatureSelector<State, ProfileState>('accounts');
+export const selectAccountState = createFeatureSelector<State, AccountsState>('accounts');
+
+export const getAccountEntitiesState = createSelector(
+  selectAccountState,
+  (state: AccountsState) => state.accounts
+);
+
+export const {
+  selectEntities: getAccountEntities,
+} = fromAccounts.adapter.getSelectors(getAccountEntitiesState);
 
 export const selectProfileState = createSelector(
   selectAccountState,
-  (state: ProfileState) => state.profile
+  (state: AccountsState) => state.profile
+);
+
+export const getProfileId = createSelector(
+  selectProfileState, 
+  fromProfile.getProfileId
 );
 
 export const getProfile = createSelector(
-  selectProfileState, 
-  fromProfile.getProfile
-);
+  getAccountEntities,
+  getProfileId,
+  (accounts, id) => accounts[id]
+)

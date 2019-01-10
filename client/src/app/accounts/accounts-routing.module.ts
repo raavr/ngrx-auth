@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './containers/profile/profile.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'profile' },
   { path: 'profile', component: ProfileComponent }
 ];
 

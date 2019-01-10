@@ -13,7 +13,7 @@ describe("Profile Reducer", () => {
 
   it('should return a user profile', () => {
     const action = new ProfileSuccess({ id: '1', name: 'Test', email: 'test@example.com' });
-    const expResult = { user: { id: '1', name: 'Test', email: 'test@example.com' } } as State;
+    const expResult = { id: '1' } as State;
 
     const result = reducer(initialState, action);
     expect(result).toEqual(expResult);

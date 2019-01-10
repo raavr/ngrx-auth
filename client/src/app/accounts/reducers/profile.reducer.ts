@@ -2,11 +2,11 @@ import { User } from 'src/app/auth/models/user';
 import * as ProfileActions from '../actions/profile.action';
 
 export interface State {
-  user: User;
+  id: string;
 }
 
 export const initialState: State = {
-  user: null
+  id: null
 }
 
 export function reducer(
@@ -17,7 +17,7 @@ export function reducer(
     case ProfileActions.ProfileActionTypes.ProfileSuccess: {
       return {
         ...state,
-        user: action.payload
+        id: action.payload.id
       } 
     }
 
@@ -31,4 +31,4 @@ export function reducer(
   }
 }
 
-export const getProfile = (state: State) => state.user;
+export const getProfileId = (state: State) => state.id;
