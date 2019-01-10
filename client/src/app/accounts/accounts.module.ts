@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './containers/profile/profile.component';
-import { ProfileRoutingModule } from './profile-routing.module';
+import { AccountsRoutingModule } from './accounts-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -13,10 +13,10 @@ import { ProfileDetailComponent } from './components/profile-detail/profile-deta
   declarations: [ProfileComponent, ProfileDetailComponent],
   imports: [
     CommonModule,
-    ProfileRoutingModule,
+    AccountsRoutingModule,
     MaterialModule,
-    StoreModule.forFeature('account', reducers),
+    StoreModule.forFeature('accounts', reducers),
     EffectsModule.forFeature([ProfileEffects]),
   ]
 })
-export class ProfileModule { }
+export class AccountsModule { }

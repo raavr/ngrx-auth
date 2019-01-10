@@ -11,14 +11,14 @@ export interface ProfileState {
 }
 
 export interface State extends fromRoot.State {
-  account: ProfileState;
+  accounts: ProfileState;
 }
 
 export const reducers: ActionReducerMap<ProfileState> = {
   profile: fromProfile.reducer,
 };
 
-export const selectAccountState = createFeatureSelector<State, ProfileState>('account');
+export const selectAccountState = createFeatureSelector<State, ProfileState>('accounts');
 
 export const selectProfileState = createSelector(
   selectAccountState,
