@@ -19,19 +19,34 @@ describe('ProfileDetailComponent', () => {
     fixture = TestBed.createComponent(ProfileDetailComponent);
     component = fixture.componentInstance;
   });
+
+  beforeEach(() => {
+    component.profile = { 
+      id: '1', 
+      name: 'Test', 
+      email: 'test@example.com', 
+      phone: '123456789' 
+    };
+  })
   
-  // This test should work properly but it doesn't because of the karma error
+  // These tests should work properly but they don't because of the karma error
   // (ie. [object ErrorEvent] thrown)
-  // Hence it's commented out, hopefully a future release will fix that issue.
-  
+  // Hence they're commented out, hopefully a future release will fix that issue. 
   // it('should create', () => {
-  //   component.profile = { 
-  //     id: '1', 
-  //     name: 'Test', 
-  //     email: 'test@example.com', 
-  //     phone: '123456789' 
-  //   };
-  //   fixture.detectChanges();
+  //   fixture.detectChanges();   
   //   expect(component).toBeTruthy();
   // });
+  
+  // it('should the card-title have a title', () => {
+  //   fixture.detectChanges();   
+  //   const compiled = fixture.debugElement.nativeElement;
+  //   expect(compiled.querySelector('mat-card-title').textContent).toEqual('My Profile');
+  // });
+
+  // it('should the first list-item have a name', () => {
+  //   fixture.detectChanges();   
+  //   const compiled = fixture.debugElement.nativeElement;
+  //   expect(compiled.querySelector('mat-list-item').textContent).toEqual(component.name);
+  // });
+
 });

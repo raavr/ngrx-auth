@@ -11,7 +11,7 @@ describe("Auth Reducer", () => {
     expect(result).toBe(state);
   });
 
-  it('should make pending to false and have no error', () => {
+  it('should return a user', () => {
     const action = new DecodeTokenSuccess({ id: '1', name: 'Test', role: 'Admin' });
     const expResult = { user: { id: '1', name: 'Test', role: 'Admin' } } as State;
 
@@ -26,14 +26,6 @@ describe("Auth Reducer", () => {
     const result = reducer(initialState, action);
 
     expect(result).toBe(expectedResult)
-  });
-
-  it('should return the initial state when logout ', () => {
-    const state = Object.assign({}, initialState);
-    const action = {} as any;
-    const result = reducer(state, action);
-
-    expect(result).toBe(state);
   });
 
 });
