@@ -3,7 +3,7 @@ export interface Credentials {
   password: string;
 }
 
-type UserRole = 'Admin' | 'User';
+type UserRole = 'admin' | 'user';
 
 export interface User {
   id: string;
@@ -11,4 +11,5 @@ export interface User {
   role?: UserRole;
   email?: string;
   phone?: string;
+  avatar?: string;
 }

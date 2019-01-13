@@ -12,8 +12,8 @@ describe("Auth Reducer", () => {
   });
 
   it('should return a user', () => {
-    const action = new DecodeTokenSuccess({ id: '1', name: 'Test', role: 'Admin' });
-    const expResult = { user: { id: '1', name: 'Test', role: 'Admin' } } as State;
+    const action = new DecodeTokenSuccess({ id: '1', name: 'Test', role: 'admin' });
+    const expResult = { user: { id: '1', name: 'Test', role: 'admin' } } as State;
 
     const result = reducer(initialState, action);
     expect(result).toEqual(expResult);

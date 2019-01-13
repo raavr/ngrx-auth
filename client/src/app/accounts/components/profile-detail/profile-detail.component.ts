@@ -5,19 +5,25 @@ import { User } from 'src/app/auth/models/user';
   selector: 'app-profile-detail',
   template: `
     <mat-card>
-    <mat-card-title>My Profile</mat-card-title>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item>{{name}}</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>{{email}}</mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>{{phone}}</mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+      <mat-card-header>
+        <img mat-card-avatar src="{{avatar}}">
+        <mat-card-title>{{name}}</mat-card-title>
+        <mat-card-subtitle>{{email}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><span class="profile__label">Phone: </span>{{phone}}</p>
+      </mat-card-content>
+    </mat-card>
   `,
-  styles: []
+  styles: [`
+    mat-card {
+      margin: 15px;
+    }
+
+    .profile__label {
+      font-weight: 700;
+    }
+  `]
 })
 export class ProfileDetailComponent {
   @Input() profile: User;
@@ -32,5 +38,9 @@ export class ProfileDetailComponent {
 
   get phone() {
     return this.profile.phone;
+  }
+
+  get avatar() {
+    return this.profile.avatar;
   }
 }

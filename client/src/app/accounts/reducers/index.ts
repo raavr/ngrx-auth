@@ -6,10 +6,12 @@ import {
 import * as fromRoot from '../../reducers';
 import * as fromProfile from './profile.reducer';
 import * as fromAccounts from './accounts.reducer';
+import * as fromBrowse from './browse-accounts.reducer';
 
 export interface AccountsState {
   accounts: fromAccounts.State;
   profile: fromProfile.State;
+  browse: fromBrowse.State
 }
 
 export interface State extends fromRoot.State {
@@ -19,12 +21,13 @@ export interface State extends fromRoot.State {
 export const reducers: ActionReducerMap<AccountsState> = {
   accounts: fromAccounts.reducer,
   profile: fromProfile.reducer,
+  browse: fromBrowse.reducer
 };
 
-export const selectAccountState = createFeatureSelector<State, AccountsState>('accounts');
+export const selectAccountsState = createFeatureSelector<State, AccountsState>('accounts');
 
 export const getAccountEntitiesState = createSelector(
-  selectAccountState,
+  selectAccountsState,
   (state: AccountsState) => state.accounts
 );
 
@@ -33,7 +36,7 @@ export const {
 } = fromAccounts.adapter.getSelectors(getAccountEntitiesState);
 
 export const selectProfileState = createSelector(
-  selectAccountState,
+  selectAccountsState,
   (state: AccountsState) => state.profile
 );
 
@@ -46,4 +49,20 @@ export const getProfile = createSelector(
   getAccountEntities,
   getProfileId,
   (accounts, id) => accounts[id]
-)
+);
+
+export const selectBrowseAccountsState = createSelector(
+  selectAccountsState,
+  (state: AccountsState) => state.browse
+);
+
+export const getAccountsIds = createSelector(
+  selectBrowseAccountsState,
+  fromBrowse.getAccountsIds
+);
+
+export const getAccounts = createSelector(
+  getAccountEntities,
+  getAccountsIds,
+  (accounts, ids) => ids.map(id => accounts[id]) 
+);

@@ -18,7 +18,7 @@ export function reducer(
     | ProfileActions.ProfileActionUnion
 ): State {
   switch (action.type) {
-    case AccountsActions.AccountsActionTypes.LoadAccountsSuccess: {
+    case AccountsActions.AccountsActionTypes.GetAccountsSuccess: {
       return adapter.addMany(action.payload, state);
     }
 

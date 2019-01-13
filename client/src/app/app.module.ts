@@ -8,7 +8,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { HttpClientModule } from '@angular/common/http';

@@ -6,6 +6,9 @@
     <app-nav-item *ngIf="loggedIn$ | async" (navigate)="closeSidenav()" routerLink="/accounts/profile" icon="person" desc="View my profile">
       Profile
     </app-nav-item>
+    <app-nav-item *ngIf="(loggedIn$ | async) && (isAdmin$ | async)" (navigate)="closeSidenav()" routerLink="/accounts/browse" icon="people" desc="View all accounts">
+      Accounts
+    </app-nav-item>
     <app-nav-item *ngIf="!(loggedIn$ | async)" (navigate)="closeSidenav()" routerLink="/login">
       Sign In
     </app-nav-item>

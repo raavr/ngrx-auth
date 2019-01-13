@@ -2,20 +2,20 @@ import { Action } from '@ngrx/store';
 import { User } from 'src/app/auth/models/user';
 
 export enum AccountsActionTypes {
-  LoadAccountsSuccess = '[Accounts] Load Accounts Success',
-  LoadAccountsFailure = '[Accounts] Load Accounts Failure'
+  GetAccountsSuccess = '[Accounts] Get Accounts Success',
+  GetAccountsFailure = '[Accounts] Get Accounts Failure'
 }
 
-export class LoadAccountsSuccess implements Action {
-  readonly type = AccountsActionTypes.LoadAccountsSuccess
+export class GetAccountsSuccess implements Action {
+  readonly type = AccountsActionTypes.GetAccountsSuccess
 
   constructor(public payload: User[]) { }
 }
 
-export class LoadAccountsFailure implements Action {
-  readonly type = AccountsActionTypes.LoadAccountsFailure;
+export class GetAccountsFailure implements Action {
+  readonly type = AccountsActionTypes.GetAccountsFailure;
 }
 
 export type AccountsActionUnion = 
-  | LoadAccountsSuccess
-  | LoadAccountsFailure;
+  | GetAccountsSuccess
+  | GetAccountsFailure;

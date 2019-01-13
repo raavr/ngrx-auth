@@ -53,7 +53,7 @@ describe('Profile Guard', () => {
     spyService.and.returnValue(serviceRes);
     
     const expected = cold('(a|)', { a: false });
-    expect(guard.canActivate()).toBeObservable(expected);
+    expect(guard.hasProfileInApi()).toBeObservable(expected);
   });
   
   it('should return true if the profile service return a valid value', () => {
@@ -63,7 +63,7 @@ describe('Profile Guard', () => {
     
     const expected = cold('(b|)', { b: true });
 
-    expect(guard.canActivate()).toBeObservable(expected);
+    expect(guard.hasProfileInApi()).toBeObservable(expected);
   });
   
   it('should return true and dispatch action if the profile service return a valid value', (done) => {
@@ -71,7 +71,7 @@ describe('Profile Guard', () => {
     const action = new ProfileActions.ProfileSuccess(user);
     spyService.and.returnValue(of(user));
     
-    guard.canActivate().subscribe((activated) => {
+    guard.hasProfileInApi().subscribe((activated) => {
       expect(activated).toEqual(true);
       expect(store.dispatch).toHaveBeenCalledWith(action);
       done();
@@ -82,7 +82,7 @@ describe('Profile Guard', () => {
     const action = new AuthActions.Logout();
     spyService.and.returnValue(throwError({ status: 401 }));
     
-    guard.canActivate().subscribe((activated) => {
+    guard.hasProfileInApi().subscribe((activated) => {
       expect(activated).toEqual(false);
       expect(store.dispatch).toHaveBeenCalledWith(action);
       done();
@@ -92,10 +92,28 @@ describe('Profile Guard', () => {
   it('should return false and navigate to "/404" if the profile service return an error with status 403', (done) => {
     spyService.and.returnValue(throwError({ status: 403 }));
     
-    guard.canActivate().subscribe((activated) => {
+    guard.hasProfileInApi().subscribe((activated) => {
       expect(activated).toEqual(false);
       expect(router.navigate).toHaveBeenCalledWith(['/404']);
       done();
     });
+  });
+
+  it('should return true if hasProfileInStore return true', () => {
+    spyOn(guard, 'hasProfileInStore').and.returnValue(of(true));
+    guard.canActivate().subscribe((inStore) => {
+      expect(inStore).toBe(true);
+    })
+  });
+
+  it('should call hasProfileInApi if hasProfileInStore return false', (done) => {
+    spyOn(guard, 'hasProfileInStore').and.returnValue(of(false));
+    spyOn(guard, 'hasProfileInApi').and.returnValue(of(true));
+
+    guard.canActivate().subscribe((activated) => {
+      expect(guard.hasProfileInApi).toHaveBeenCalled();
+      expect(activated).toBe(true);
+      done();
+    })
   });
 });

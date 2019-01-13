@@ -1,24 +1,38 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import { Observable, of, combineLatest } from 'rxjs';
+import { map, catchError, tap, switchMap, take } from 'rxjs/operators';
 import { ProfileService } from '../services/profile.service';
 import * as ProfileActions from '../actions/profile.action';
-import * as fromProfile from '../reducers'
+import * as fromProfile from '../reducers';
+import * as fromRoot from '../../reducers';
+import * as fromAuth from '../../auth/reducers';
 import * as AuthActions from 'src/app/auth/actions/auth.actions';
   
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileGuard implements CanActivate {
-  constructor(private profileService: ProfileService, private router: Router, private store: Store<fromProfile.State>) {}
+  constructor(private profileService: ProfileService, private router: Router, private store: Store<fromRoot.State>) {}
   
-  canActivate(): Observable<boolean> {
+  hasProfileInStore(): Observable<boolean> {
+    return combineLatest(
+      this.store.pipe(select(fromProfile.getAccountEntities)),
+      this.store.pipe(select(fromAuth.getUser)),
+    ).pipe(
+      map(([entities, user]) => entities[user.id]),
+      tap(profile => profile && this.store.dispatch(new ProfileActions.ProfileSuccess(profile))),
+      map(profile => !!profile),
+      take(1)
+    );
+  }
+
+  hasProfileInApi(): Observable<boolean> {
     return this.profileService.getMyProfile().pipe(
-      map(user => new ProfileActions.ProfileSuccess(user)),
+      map(profile => new ProfileActions.ProfileSuccess(profile)),
       tap((action: ProfileActions.ProfileSuccess) => this.store.dispatch(action)),
-      map(user => !!user),
+      map(profile => !!profile),
       catchError((error) => {
         if(error.status === 401) {
           this.store.dispatch(new AuthActions.Logout());
@@ -27,6 +41,16 @@ export class ProfileGuard implements CanActivate {
         }
         return of(false);
       })
+    )
+  }
+
+  canActivate(): Observable<boolean> {
+    return this.hasProfileInStore().pipe(
+      switchMap(inStore =>  
+        inStore 
+          ? of(inStore) 
+          : this.hasProfileInApi()
+      )
     )
   }
 }

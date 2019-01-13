@@ -16,11 +16,13 @@ import { NavbarActions } from './navbar/actions';
 export class AppComponent implements OnInit {
   
   loggedIn$: Observable<boolean>;
+  isAdmin$: Observable<boolean>;
   user$: Observable<User>;
   showSidenav$: Observable<boolean>;
   
   constructor(private store: Store<fromRoot.State>) {
     this.loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
+    this.isAdmin$ = this.store.pipe(select(fromAuth.isAdmin));
     this.user$ = this.store.pipe(select(fromAuth.getUser));
     this.showSidenav$ = this.store.pipe(select(fromNavbar.getShowSidenav));
   }

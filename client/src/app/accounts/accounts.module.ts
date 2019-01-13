@@ -8,9 +8,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProfileEffects } from './effects/profile.effects';
 import { reducers } from './reducers';
 import { ProfileDetailComponent } from './components/profile-detail/profile-detail.component';
+import { AccountsComponent } from './containers/accounts/accounts.component';
 
 @NgModule({
-  declarations: [ProfileComponent, ProfileDetailComponent],
+  declarations: [
+    ProfileComponent, 
+    ProfileDetailComponent, 
+    AccountsComponent
+  ],
   imports: [
     CommonModule,
     AccountsRoutingModule,

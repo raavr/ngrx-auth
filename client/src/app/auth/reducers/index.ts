@@ -29,6 +29,7 @@ export const selectAuthSessionState = createSelector(
 );
 export const getUser = createSelector(selectAuthSessionState, fromAuth.getUser);
 export const getLoggedIn = createSelector(getUser, user => !!user);
+export const isAdmin = createSelector(getUser, user => user && user.role === 'admin');
 
 export const selectLoginState = createSelector(
   selectAuthState,

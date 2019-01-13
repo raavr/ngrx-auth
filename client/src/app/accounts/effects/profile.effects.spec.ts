@@ -5,6 +5,8 @@ import { Observable, of } from 'rxjs';
 import * as AuthActions from '../../auth/actions/auth.actions';
 import * as ProfileActions from '../actions/profile.action';
 import { ProfileEffects } from './profile.effects';
+import * as AccountsActions from '../actions/accounts.action';
+import { cold } from 'jasmine-marbles';
 
 describe('AuthEffects', () => {
   let effects: ProfileEffects;
@@ -21,15 +23,15 @@ describe('AuthEffects', () => {
     actions$ = TestBed.get(Actions);
   });
 
-  it('should return a ProfileFailure action', (done: any) => {
+  it('should return a ProfileFailure action', () => {
     const action = new AuthActions.Logout();
 
     actions$ = of(action);
+    const profileAction = new ProfileActions.ProfileFailure();
+    const accountsAction =  new AccountsActions.GetAccountsFailure();
 
-    effects.logout$.subscribe((profAction) => {
-      expect(profAction).toEqual(new ProfileActions.ProfileFailure());
-      done();
-    });
+    const expected = cold('(ab|)', { a: profileAction, b: accountsAction });
+    expect(effects.logout$).toBeObservable(expected)
   });
 
 });
