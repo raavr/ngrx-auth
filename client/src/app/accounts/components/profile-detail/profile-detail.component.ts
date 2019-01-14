@@ -17,7 +17,8 @@ import { User } from 'src/app/auth/models/user';
   `,
   styles: [`
     mat-card {
-      margin: 15px;
+      margin: 0 15px 15px 0;
+      min-width: 270px;
     }
 
     .profile__label {
