@@ -18,12 +18,11 @@ import { NavbarModule } from './navbar/navbar.module';
 import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NotFoundComponent
+    AppComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +43,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AuthModule,
     NavbarModule,
     HomeModule,
+    CoreModule,
     AppRoutingModule,
   ],
   providers: [],

@@ -8,7 +8,10 @@ import * as fromRoot from '../../../reducers';
 @Component({
   selector: 'app-accounts',
   template: `
-    <app-profile-detail *ngFor="let account of (accounts$ | async)" [profile]="account"></app-profile-detail>
+    <app-page-header title="Accounts"></app-page-header>
+    <app-page-container>
+      <app-profile-detail *ngFor="let account of (accounts$ | async)" [profile]="account"></app-profile-detail>
+    </app-page-container>
   `
 })
 export class AccountsComponent {

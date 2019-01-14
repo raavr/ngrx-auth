@@ -9,6 +9,7 @@ import { ProfileEffects } from './effects/profile.effects';
 import { reducers } from './reducers';
 import { ProfileDetailComponent } from './components/profile-detail/profile-detail.component';
 import { AccountsComponent } from './containers/accounts/accounts.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AccountsComponent } from './containers/accounts/accounts.component';
     CommonModule,
     AccountsRoutingModule,
     MaterialModule,
+    CoreModule,
     StoreModule.forFeature('accounts', reducers),
     EffectsModule.forFeature([ProfileEffects]),
   ]

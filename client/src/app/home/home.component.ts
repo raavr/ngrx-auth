@@ -8,16 +8,8 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
   template: `
-    <mat-card>
-      <mat-card-title>Hi, {{(authUser$ | async).name}}</mat-card-title>
-      <mat-card-content>What do you want to do today?</mat-card-content>
-    </mat-card>
-  `,
-  styles: [`
-    mat-card {
-      text-align: center;
-    }
-  `]
+    <app-page-header title="Hi, {{(authUser$ | async).name}}" subtitle="What do you want to do today?"></app-page-header>
+  `
 })
 export class HomeComponent {
   authUser$: Observable<User>;

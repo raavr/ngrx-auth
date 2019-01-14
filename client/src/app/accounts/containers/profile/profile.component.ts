@@ -8,7 +8,10 @@ import * as fromRoot from '../../../reducers';
 @Component({
   selector: 'app-profile',
   template: `
-    <app-profile-detail [profile]="profile$ | async"></app-profile-detail>
+    <app-page-header title="My profile"></app-page-header>
+    <app-page-container>
+      <app-profile-detail [profile]="profile$ | async"></app-profile-detail>
+    </app-page-container>
   `
 })
 export class ProfileComponent {
