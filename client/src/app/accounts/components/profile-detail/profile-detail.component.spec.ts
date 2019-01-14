@@ -37,16 +37,16 @@ describe('ProfileDetailComponent', () => {
   //   expect(component).toBeTruthy();
   // });
   
-  // it('should the card-title have a title', () => {
-  //   fixture.detectChanges();   
-  //   const compiled = fixture.debugElement.nativeElement;
-  //   expect(compiled.querySelector('mat-card-title').textContent).toEqual('My Profile');
-  // });
+  it('should the card-title have a title', () => {
+    fixture.detectChanges();   
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('mat-card-title').textContent).toEqual(component.profile.name);
+  });
 
-  // it('should the first list-item have a name', () => {
-  //   fixture.detectChanges();   
-  //   const compiled = fixture.debugElement.nativeElement;
-  //   expect(compiled.querySelector('mat-list-item').textContent).toEqual(component.name);
-  // });
+  it('should the profile label have a phone', () => {
+    fixture.detectChanges();   
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.profile__label').textContent).toEqual('Phone: ');
+  });
 
 });
