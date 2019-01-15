@@ -22,4 +22,5 @@
   <div class="app__container">
     <router-outlet></router-outlet>
   </div>
+  <app-page-backdrop *ngIf="showSidenav$ | async" (backdropClick)="closeSidenav()"></app-page-backdrop>
 </mat-sidenav-container>

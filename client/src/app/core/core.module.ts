@@ -4,12 +4,14 @@ import { PageHeaderComponent } from './components/page-header.component';
 import { PageContainerComponent } from './components/page-container.component';
 import { MaterialModule } from '../material/material.module';
 import { NotFoundComponent } from './components/not-found.component';
+import { PageBackdropComponent } from './components/page-backdrop.component';
 
 @NgModule({
   declarations: [
     PageContainerComponent, 
     PageHeaderComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PageBackdropComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { NotFoundComponent } from './components/not-found.component';
   exports: [
     PageContainerComponent,
     PageHeaderComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PageBackdropComponent
   ]
 })
 export class CoreModule { }

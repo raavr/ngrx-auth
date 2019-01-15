@@ -8,7 +8,7 @@ import {
 @Component({
   selector: 'app-sidenav',
   template: `
-    <mat-sidenav #sidenav [opened]="open" (keydown.escape)="sidenav.close()" (closedStart)="closeSidenav.emit()" disableClose>
+    <mat-sidenav #sidenav [opened]="open" (keydown.escape)="sidenav.close(); closeSidenav.emit()" disableClose>
       <mat-nav-list>
         <ng-content></ng-content>
       </mat-nav-list>
