@@ -2,9 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { StoreModule, combineReducers, Store } from '@ngrx/store';
-import * as fromAuth from '../../reducers';
+import * as fromAuth from '../reducers';
 import { LoginComponent } from './login.component';
-import { Login } from '../../actions/auth.actions';
+import { Login } from '../actions/auth.actions';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

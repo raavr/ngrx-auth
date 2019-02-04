@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AccountsComponent } from './accounts.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { StoreModule, combineReducers } from '@ngrx/store';
-import * as fromAccounts from '../../reducers/';
+import * as fromAccounts from '../reducers';
 
 describe('AccountsComponent', () => {
   let component: AccountsComponent;

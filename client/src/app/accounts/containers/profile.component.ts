@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/auth/models/user';
 import { Store, select } from '@ngrx/store';
-import * as fromProfile from '../../reducers';
-import * as fromRoot from '../../../reducers';
+import * as fromProfile from '../reducers';
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'app-profile',

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileComponent } from './profile.component';
 import { StoreModule, combineReducers } from '@ngrx/store';
-import * as fromProfile from '../../reducers';
+import * as fromProfile from '../reducers';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ProfileComponent', () => {
