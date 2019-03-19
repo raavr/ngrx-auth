@@ -174,7 +174,7 @@ var AppComponent = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ENDPOINT", function() { return ENDPOINT; });
-var ENDPOINT = 'http://localhost:3000';
+var ENDPOINT = 'https://ngrx-auth-server.herokuapp.com';
 
 
 /***/ }),
@@ -604,7 +604,7 @@ var LoginFormComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DOMAINS", function() { return DOMAINS; });
 var DOMAINS = {
-    WHITE_LISTED: ['localhost:3000'],
+    WHITE_LISTED: ['ngrx-auth-server.herokuapp.com'],
     BLACK_LISTED: [] //https://github.com/auth0/angular2-jwt#blacklistedroutes-array
 };
 
