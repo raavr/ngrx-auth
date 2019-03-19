@@ -1,27 +1,54 @@
-# NgRxCounter
+# The Angular App with an authorization mechanism built with NgRx and Angular Material
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
+## Demo
+![Demo 1][1]
 
-## Development server
+or go to the live preview: https://raavr.github.io/ngrx-auth
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Credentials
 
-## Code scaffolding
+Normal user: 
+```
+Login: user@example.com
+Pass: user123
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Admin:
+```
+Login: admin@example.com
+Pass: admin123
+```
 
-## Build
+## Usage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+First clone this repository and follow the steps below.
 
-## Running unit tests
+------
+Open a terminal window:
+1. Install all dependencies: 
+    
+    ```
+    npm install
+    ```
+2. Run the server:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    ```
+    npm run start-server
+    ```
 
-## Running end-to-end tests
+3. Open another terminal window and run the app (it builds your app and starts a development server):
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+    ```
+    npm run start-app
+    ```
 
-## Further help
+4. Then go to http://localhost:4200 in your browser :)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+------
+If you want to run angular tests, write:
+
+  ```
+  npm run test
+  ```
+
+[1]: ./demo/demo.gif
